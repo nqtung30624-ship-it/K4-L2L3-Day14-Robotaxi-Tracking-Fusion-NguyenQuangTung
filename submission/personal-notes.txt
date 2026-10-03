@@ -1,35 +1,36 @@
-PHIẾU CÁ NHÂN — DAY 14
+# PHIẾU CÁ NHÂN — DAY 14
+
 Điền file này, chạy QC vào submission/qc-j01 và submission/qc-practice, commit rồi nộp link repo.
 Không dán ảnh, toạ độ điểm hay nội dung file export vào đây.
 
-Họ tên / mã học viên:
-Object J01 (a/b/c/d theo docs/cases.md) / track ID trong task J01:
-Phiên bản CVAT / overlay đã bật (có/không):
+Họ tên / mã học viên: Nguyễn Quang Tùng
+Object J01 (a/b/c/d theo docs/cases.md) / track ID trong task J01: J01-c / Track ID 0
+Phiên bản CVAT / overlay đã bật (có/không): CVAT v2.74.1 / có
 
-J01 — TRACK LÕI
-Frame fit và lý do:
-L / W / H (m):
-Keyframe quan trọng và lý do:
-Đã bấm F qua đủ frame 0–65 (có/không):
-Đoạn thưa / che khuất / dễ nhầm identity:
+## J01 — TRACK LÕI
+Frame fit và lý do: Frame 48; xe nằm trọn vẹn trong vùng ROI [1615, 840, 1910, 1017] trên camera trước image_1, cụm điểm LiDAR đầy đủ rõ nét để căn chỉnh chuẩn kích thước và heading ban đầu.
+L / W / H (m): 4.74 / 2.13 / 1.89
+Keyframe quan trọng và lý do: Frame 4 (xe bắt đầu xuất hiện rõ), Frame 9 (bắt đầu điều chỉnh heading theo hướng cua), Frame 27 (xe tiến lại gần điểm quan sát), Frame 48 (frame neo chuẩn hóa kích thước), Frame 64 (khung cuối trước khi ra khỏi tầm nhìn).
+Đã bấm F qua đủ frame 0–65 (có/không): có
+Đoạn thưa / che khuất / dễ nhầm identity: Frame 0–3 (xe ở rất xa, điểm LiDAR thưa dễ lẫn với nhiễu nền hoặc xe lân cận); Frame 55–65 (xe bị khuất một phần phía đuôi và di chuyển ra rìa tầm nhìn camera).
 
-SELF-QC (từ qc_tracks.csv / qc_flags.csv)
-Lần QC đầu — cờ của track J01 (loại, frame):
-Quyết định cho từng cờ (sửa / giữ vì hợp lệ / chưa đủ evidence) và lý do:
-Đã sửa gì sau QC đầu; QC cuối còn cờ nào:
-Nhận xét của bạn cùng cặp và bạn đồng ý/không đồng ý vì sao:
+## SELF-QC (từ qc_tracks.csv / qc_flags.csv)
+Lần QC đầu — cờ của track J01 (loại, frame): dimension_jump (frame 6), heading_jump (frame 32).
+Quyết định cho từng cờ (sửa / giữ vì hợp lệ / chưa đủ evidence) và lý do: Sửa; dimension_jump do co giãn kích thước thủ công giữa các frame chưa đồng nhất; heading_jump do lệch góc xoay khi nội suy chuyển động.
+Đã sửa gì sau QC đầu; QC cuối còn cờ nào: Khóa cố định L/W/H trên toàn bộ các frame, nắn lại góc yaw khớp với hướng di chuyển; QC cuối không còn cờ lỗi nghiêm trọng (0 critical flags).
+Nhận xét của bạn cùng cặp và bạn đồng ý/không đồng ý vì sao: Bạn cùng cặp nhận xét hộp 3D ở frame 48 khớp sát mép xe trên camera image_1; đồng ý vì overlay cho thấy viền 3D trùng khít thân xe ngoài đời thực.
 
-CAMERA–LIDAR (overlay trên image_1)
-Ca bình thường (frame / quan sát):
-Ca khó (frame / quan sát 2D / quan sát 3D):
-Giả thuyết nguyên nhân (annotation / FOV / occlusion / sparse / nghi calibration / chưa đủ evidence):
-Hành động (sửa / giữ / báo Lab Coach) và lý do:
+## CAMERA–LIDAR (overlay trên image_1)
+Ca bình thường (frame / quan sát): Frame 48; khung cuboid 3D chiếu lên khớp hoàn hảo với thân xe SUV màu đen đỗ bên phải đường.
+Ca khó (frame / quan sát 2D / quan sát 3D): Frame 1–3; 2D xe ở rất xa và bé trong khung hình; 3D cụm điểm LiDAR chỉ có vài điểm thưa thớt khó xác định tâm chính xác.
+Giả thuyết nguyên nhân (annotation / FOV / occlusion / sparse / nghi calibration / chưa đủ evidence): sparse (điểm phản xạ LiDAR bị thưa do khoảng cách xa).
+Hành động (sửa / giữ / báo Lab Coach) và lý do: Giữ và nội suy dựa theo kích thước chuẩn đã fit ở frame neo 48; tránh co nhỏ hộp theo cụm điểm thưa.
 
-CASE NGẮN (task practice)
-Case → track ID (ví dụ B01 → 3):
-Case đã xong:
-Case đang dở / chỗ kẹt:
-fragmentation_suspect ở đầu/cuối case đã kiểm là do cách cắt case (có/không):
+## CASE NGẮN (task practice)
+Case → track ID (ví dụ B01 → 3): B01 → 0
+Case đã xong: B01
+Case đang dở / chỗ kẹt: Không
+fragmentation_suspect ở đầu/cuối case đã kiểm là do cách cắt case (có/không): có
 
-THỜI GIAN
-J01 / case ngắn / QC và fusion:
+## THỜI GIAN
+J01 / case ngắn / QC và fusion: 45 phút / 25 phút / 20 phút
